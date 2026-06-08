@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.50 24/01/2025">
+	<xs:include schemaLocation="RAWBASIS.xsd"/>
+	<xs:include schemaLocation="RAWBPL.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+    ================== Elementen voor bepalingen =====================  
+   </xs:documentation>
+	</xs:annotation>
+	<xs:element name="proeven.compleet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr02"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="bpl.paragraaf2" maxOccurs="9"/>
+				<xs:element ref="proefpar2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>
+    ================== Elementen voor algemene teksten =====================  
+   </xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation> ====================bijlagen / modellen / tabellen / figuren =================</xs:documentation>
+	</xs:annotation>
+	<xs:element name="proeven2025">
+		<xs:annotation>
+			<xs:documentation>Definitie hoofdstuk Proeven met de nieuwe 11-deling en verkorte boom</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="proef.nr"/>
+				<xs:element ref="proef.naam"/>
+				<xs:element ref="paragraafproef2025" maxOccurs="13"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="paragraafproef2025">
+		<xs:annotation>
+			<xs:documentation>Paragraaf van de 11 deling in de proeven</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="proefparagraafnr2025"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="proeftekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="proefparagraafnr2025" type="gen.codeeenoftweecijfer">
+		<xs:annotation>
+			<xs:documentation>nummer van de 11 deling in de proeven</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="proefpar2">
+		<xs:annotation>
+			<xs:documentation>paragraaf in de proeven waar de complete set proeven onder wordt gedefinieerd</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="proeven2025" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

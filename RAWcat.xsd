@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
+<!-- Note: Contains some changes for Fonto - marked with comments. File should be kept up to date with original XSD. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.60 27/03/2026">
+	<xs:include schemaLocation="RAWBASIS.xsd"/>
+	<xs:element name="cat.compleet">
+		<xs:annotation>
+			<xs:documentation>de complete RAW-catalogus</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cat.werkcategorie" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cat.werkcategorie">
+		<xs:annotation>
+			<xs:documentation>Definitie van een werkcategorie</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="werkcategorie.nr"/>
+				<xs:element ref="werkcategorie.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="cat.subwerkcategorie" minOccurs="0" maxOccurs="99"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cat.subwerkcategorie">
+		<xs:annotation>
+			<xs:documentation>Definitie van een subwerkcategorie (nummer + titel + resultaatsbeschrijvingen)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="subwerkcategorie.nr"/>
+				<xs:element ref="subwerkcategorie.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="cat.resultaatsbeschrijving" maxOccurs="99"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cat.resultaatsbeschrijving">
+		<xs:annotation>
+			<xs:documentation>Definitie van een complete resultaatsbeschrijving</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdcode.volgnr" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="versie.informatie" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="romptekst" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="eenheid"/>
+				<xs:element ref="hoofdcode.hoofdtekst"/>
+				<xs:element ref="hoofdcode.tekstblok"/>
+				<xs:element ref="deficode.positie" minOccurs="0" maxOccurs="6"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

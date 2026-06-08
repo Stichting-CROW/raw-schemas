@@ -1,0 +1,3971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.50 17/12/2025">
+	<xs:annotation>
+		<xs:documentation>Het framework voor de losse sjablonen van het ABB</xs:documentation>
+	</xs:annotation>
+	<!--contractvormen-->
+	<xs:element name="raw.bestek">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor het bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo"/>
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="dlx.voor.compleet"/>
+				<xs:element ref="dl1.compleet"/>
+				<xs:element ref="dl2.compleet"/>
+				<xs:element ref="dl3.compleet"/>
+				<xs:element ref="dlx.na.compleet"/>
+				<xs:element ref="dlx.voor.inschrijving.compleet"/>
+				<xs:element ref="dlx.inschrijvingsbiljet"/>
+				<xs:element ref="dlx.voorblad.inschrijvingsstaat"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.bestek.nr" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>het besteknummer in RAW</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="raw.nvi">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor de nota van inlichtingen voor een bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo.orig"/>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.voor.compleet" minOccurs="0"/>
+				<xs:element ref="dl1.compleet" minOccurs="0"/>
+				<xs:element ref="dl2.compleet.nvi" minOccurs="0"/>
+				<xs:element ref="dl3.compleet" minOccurs="0"/>
+				<xs:element ref="dlx.na.compleet" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.raamovereenkomst">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor de raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo"/>
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="dlx.voor.compleet"/>
+				<xs:element ref="dl1.compleet"/>
+				<xs:element ref="dl2.compleet.ro"/>
+				<xs:element ref="dl3.compleet"/>
+				<xs:element ref="dlx.na.compleet"/>
+				<xs:element ref="dlx.voor.inschrijving.compleet"/>
+				<xs:element ref="dlx.inschrijvingsbiljet"/>
+				<xs:element ref="dlx.voorblad.inschrijvingsstaat"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor de nota van inlichtingen voor de raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo.orig"/>
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="dlx.voor.compleet"/>
+				<xs:element ref="dl1.compleet"/>
+				<xs:element ref="dl2.compleet.nvi.ro"/>
+				<xs:element ref="dl3.compleet"/>
+				<xs:element ref="dlx.na.compleet"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.deelopdracht.raamovereenkomst">
+		<xs:annotation>
+			<xs:documentation>De dfinitie van de sjabloon voor de deelopdracht van een raampovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo.orig"/>
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="dlx.voor.compleet"/>
+				<xs:element ref="dl2.compleet.do"/>
+				<xs:element ref="dlx.na.compleet"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.inschrijvingsstaat.raamovereenkomst">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor de inschrijvingsstaat van een raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+                <xs:element ref="raw.contractinfo.orig" minOccurs="0"/> <!-- Optional for Fonto -->
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="ins.stt.voorblad"/>
+				<xs:element ref="ins.stt.voorsubtot.ro"/>
+				<xs:element ref="ins.stt.staart.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--attributes en elementen-->
+	<xs:attribute name="aard">
+		<xs:annotation>
+			<xs:documentation>
+        L = aannemer moet bouwstof leveren
+        T = bouwstof wordt door opdrachtgever ter beschiking gesteld
+        I = Ter inlichting
+        H = hergebruik zonder bewerking R= hergebruik na bewerking
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="L"/>
+				<xs:enumeration value="T"/>
+				<xs:enumeration value="I"/>
+				<xs:enumeration value="H"/>
+				<xs:enumeration value="R"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="eenheid.bouwstof" type="eenheid">
+		<xs:annotation>
+			<xs:documentation>De eenheid bij de bouwstof</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="eenheidwijzigbaar">
+		<xs:annotation>
+			<xs:documentation>Attribuut waarmee wordt aangegeven of de eenheid mag worden gemuteerd</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ja"/>
+				<xs:enumeration value="nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="hoev.bouwstof" type="hoev.2decimalen">
+		<xs:annotation>
+			<xs:documentation>hoeveelheid bouwstof</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="inspring" type="xs:positiveInteger">
+		<xs:annotation>
+			<xs:documentation>
+        Attribuut dat de positie bepaalt van het eerste karakter.
+        De positie wordt in 1/10 mm weergegeven.
+        Dit attribuut moet worden gebruikt bij alineas.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="invultype">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="besteknummer"/>
+				<xs:enumeration value="toelichting"/>
+				<xs:enumeration value="omschrijving"/>
+				<xs:enumeration value="reglement"/>
+				<xs:enumeration value="omschrijvingperceel"/>
+				<xs:enumeration value="inschrijverbedrijfa"/>
+				<xs:enumeration value="inschrijvernaama"/>
+				<xs:enumeration value="inschrijverfunctiea"/>
+				<xs:enumeration value="inschrijverplaatsa"/>
+				<xs:enumeration value="inschrijverkvknummera"/>
+				<xs:enumeration value="inschrijverbedrijfb"/>
+				<xs:enumeration value="inschrijvernaamb"/>
+				<xs:enumeration value="inschrijverfunctieb"/>
+				<xs:enumeration value="inschrijverplaatsb"/>
+				<xs:enumeration value="inschrijverkvknummerb"/>
+				<xs:enumeration value="inschrijverbedrijfc"/>
+				<xs:enumeration value="inschrijvernaamc"/>
+				<xs:enumeration value="inschrijverfunctiec"/>
+				<xs:enumeration value="inschrijverplaatsc"/>
+				<xs:enumeration value="inschrijverkvknummerc"/>
+				<xs:enumeration value="aannemingssomexclusiefcijfers"/>
+				<xs:enumeration value="aannemingssomexclusiefletters"/>
+				<xs:enumeration value="omzetbelastingcijfers"/>
+				<xs:enumeration value="omzetbelastingletters"/>
+				<xs:enumeration value="ondertekeningdatum"/>
+				<xs:enumeration value="ondertekeningplaats"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="kenmerk"/>
+	<xs:attribute name="lijst.item.bullettype">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="decimaal"/>
+				<xs:enumeration value="klein_letter"/>
+				<xs:enumeration value="groot_letter"/>
+				<xs:enumeration value="klein_romein"/>
+				<xs:enumeration value="groot_romein"/>
+				<xs:enumeration value="rond"/>
+				<xs:enumeration value="open_rond"/>
+				<xs:enumeration value="blok"/>
+				<xs:enumeration value="open_blok"/>
+				<xs:enumeration value="ster"/>
+				<xs:enumeration value="pijl"/>
+				<xs:enumeration value="vink"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="lijst.item.inspringen" type="xs:unsignedInt"/>
+	<xs:attribute name="lijst.item.start" type="xs:unsignedInt"/>
+	<xs:attribute name="lijst.item.suffix">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="punt"/>
+				<xs:enumeration value="haakje"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="lijst.item.tekstbreedte" type="xs:unsignedInt"/>
+	<xs:attribute name="lijst.item.tekstpositie" type="xs:unsignedInt"/>
+	<xs:attribute name="muteren">
+		<xs:annotation>
+			<xs:documentation>geeft aan of tekst mag worden gemuteerd</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="ja|nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="paginaeinde">
+		<xs:annotation>
+			<xs:documentation>
+        Attribuut waarmee wordt aangegeven of het betreffende element op een nieuwe pagina moet beginnen
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ja"/>
+				<xs:enumeration value="nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="tabposities">
+		<xs:annotation>
+			<xs:documentation>attribuut dat mogelijkheid bied tabposities uit te wisselen</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="uitbreiden">
+		<xs:annotation>
+			<xs:documentation>geeft aan of delen tekst mogen worden uitgebreid met bijvoorbeel dmeer paragrafen</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="ja|nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="verwijderen">
+		<xs:annotation>
+			<xs:documentation>geeft aan of een tekst of paragraaf o.i.d. mag worden verwijdern</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="ja|nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="wijzigingspost">
+		<xs:annotation>
+			<xs:documentation>Attribuut waarmee wordt aangegeven of een post een wijzigingspost is</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ja"/>
+				<xs:enumeration value="nee"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attributeGroup name="cellhalign">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      horizontal alignment attributes for cell contents
+
+      char        alignment char, e.g. char=':'
+      charoff     offset for alignment char
+      </xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="cellhalign">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="left"/>
+					<xs:enumeration value="center"/>
+					<xs:enumeration value="right"/>
+					<xs:enumeration value="justify"/>
+					<xs:enumeration value="char"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="char" type="Character"/>
+		<xs:attribute name="charoff" type="Length"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="cellvalign">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      vertical alignment attributes for cell contents
+      </xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="cellvalign">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="top"/>
+					<xs:enumeration value="middle"/>
+					<xs:enumeration value="bottom"/>
+					<xs:enumeration value="baseline"/>
+					<xs:enumeration value="center"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="coreattrs">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): core attributes common to most elements
+      id       document-wide unique id
+      class    space separated list of classes
+      style    associated style info
+      title    advisory title/amplification      </xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="id" type="xs:ID"/>
+		<xs:attribute name="class" type="xs:string"/>
+		<xs:attribute name="style" type="StyleSheet"/>
+		<xs:attribute name="title" type="Text"/>
+	</xs:attributeGroup>
+	<xs:element name="aanwijzings.tekst" type="tekstblok.aanwijzings.tekst">
+		<xs:annotation>
+			<xs:documentation>Element waarmee aanwijzingen kunnen worden toegevoegd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="alinea.hoofdcode">
+		<xs:annotation>
+			<xs:documentation>Element die een alinea voorstelt in deel22 waaraan een bouwstof gekoppeld kan worden</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.alinea.vastvrij">
+					<xs:attribute ref="inspring"/>
+					<xs:attribute ref="tabposities"/>
+					<xs:attribute ref="eenheid.bouwstof"/>
+					<xs:attribute ref="eenheidwijzigbaar"/>
+					<xs:attribute ref="hoev.bouwstof"/>
+					<xs:attribute ref="aard"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="alinea.inschrijvingsdocument">
+		<xs:annotation>
+			<xs:documentation>tekstplaats voor inschrijivngsdocument</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="hoofdcode.vastetekst"/>
+				<xs:element ref="hoofdcode.vrijetekst"/>
+				<xs:element ref="hoofdcode.invultekst"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="alinea.paragraaf" type="tekstblok.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>tekstelement voor de sjablonen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="artikel.hoofd" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>naam van een artikel</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="artikel.nr" type="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>Artikelnummer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="behoort.tot.raamovk" nillable="false">
+		<xs:annotation>
+			<xs:documentation>element dat aangeeft of een bestekspost bij aanbesteding tot een bestek behoort (waarde = ja) of later is toegevoegd (waarde = nee) als de waarde '0' is betreft het een bestekspost die is toegevoegd aan de deelopdracht maar niet in de raamovk wordt overgenomen.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ja"/>
+				<xs:enumeration value="nee"/>
+				<xs:enumeration value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="bestekschrijvers.invultekst">
+		<xs:annotation>
+			<xs:documentation>Element waarbinnen de bestekschrijver kleine stukjes eigen tekst kan invullen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="lengte" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:positiveInteger"/>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bestekschrijvers.vrijetekst">
+		<xs:annotation>
+			<xs:documentation>Element waarbinnen de bestekschrijver eigen tekst kan invullen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute name="lengte" type="xs:positiveInteger" default="500"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.artikel">
+		<xs:annotation>
+			<xs:documentation>Definitie van een artikel uit de cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="artikel.nr" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="versie.informatie" minOccurs="0"/>
+				<xs:element ref="artikel.hoofd" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="bpl.lid" maxOccurs="99"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.hoofdstuk0109"/>
+	<xs:element name="bpl.hoofdstuk1099"/>
+	<xs:element name="bpl.lid">
+		<xs:annotation>
+			<xs:documentation>Definitie van een lid uit de cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="lid.nr"/>
+				<xs:element ref="bpl.lidtekst"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.lidtekst" type="tekstblok.uitgebreid">
+		<xs:annotation>
+			<xs:documentation> tekst van een lid uit de cat. bepalingen - hier kan aanwijzingstekst voorkomen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bpl.paragraaf.hfd0109">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf.nr2"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="bpl.artikel" maxOccurs="99"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="br" type="gen.leegelement">
+		<xs:annotation>
+			<xs:documentation>XMTML1 (afgeleid): Geforceerd regeleinde (zachte return)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="col">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      col elements define the alignment properties for cells in
+      one or more columns.
+
+      The width attribute specifies the width of the columns, e.g.
+
+          width=64        width in screen pixels
+          width=0.5*      relative width of 0.5
+
+      The span attribute causes the attributes of one
+      col element to apply to more than one column.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="span" type="Number" default="1"/>
+			<xs:attribute name="width" type="MultiLength"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="colgroup">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      colgroup groups a set of col elements. It allows you to group
+      several semantically related columns together.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="span" type="Number" default="1"/>
+			<xs:attribute name="width" type="MultiLength"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="colspec">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="deficode">
+		<xs:annotation>
+			<xs:documentation>Alle deficode-inhouden binnen één positie worden binnen dit element gegroepeerd</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="positie.nr" type="deficode.positienr"/>
+				<xs:element name="inhoud.nr" type="deficode.inhoudnr"/>
+				<xs:element ref="deficode.inhoud.tekst" maxOccurs="unbounded"/>
+				<xs:element ref="aanwijzings.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deficode.inhoud.tekst">
+		<xs:annotation>
+			<xs:documentation>Deficode inhoud tekst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.hoofdcode">
+					<xs:attribute name="lengte" type="xs:positiveInteger" default="500"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl1.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 1 van het bestek / raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dlx.paragraaf" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="uitbreiden"/>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl2.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 2 van het bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl21.compleet"/>
+				<xs:element ref="dl22.compleet"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl2.compleet.do">
+		<xs:annotation>
+			<xs:documentation>deel 2 van een deelopdracht raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.compleet.do"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl2.compleet.nvi">
+		<xs:annotation>
+			<xs:documentation>Het complete deel 2 voor nota van inlichtingen - bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl21.compleet" minOccurs="0"/>
+				<xs:element ref="dl22.compleet.nvi"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl2.compleet.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Het complete deel 2 voor nota van inlichtingen - raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl21.compleet" minOccurs="0"/>
+				<xs:element ref="dl22.compleet.nvi.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl2.compleet.ro">
+		<xs:annotation>
+			<xs:documentation>deel 2 van de raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl21.compleet"/>
+				<xs:element ref="dl22.compleet.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl21.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 2.1 van het bestek / raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam" maxOccurs="unbounded"/>
+				<xs:element ref="dlx.paragraaf" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="uitbreiden"/>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.6cijfer.0">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.nr6.0"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.6cijfer.0.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost eindigend op 0 ten behoeve van Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.nr6.0"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.6cijfer.0.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost eindigend op 0 ten behoeve van Nota van Inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.nr6.0"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl.ro"/>
+					<xs:element ref="dl22.hoev.res.verpl.ro"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+				<xs:element ref="behoort.tot.raamovk"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.6cijfer.volg">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost niet eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.nr6.volg"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.6cijfer.volg.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost niet eindigend op 0 ten behoeve van Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.nr6.volg"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.nr6.0">
+		<xs:annotation>
+			<xs:documentation>6 cijferig bestekspostnummer eindigend op een nul</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[0-8]\d{4}[0]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.bpost.nr6.volg">
+		<xs:annotation>
+			<xs:documentation>6 cijferig bestekspostnummer niet eindigend op een nul</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[0-8]\d{4}[1-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.bpost.tussenhoofd.nvi">
+		<xs:annotation>
+			<xs:documentation>Een tussenhoofd voor nota's</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.tussenhoofdnr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.bpost.tussenhoofdnr">
+		<xs:annotation>
+			<xs:documentation>1 tot 4 cijferig tussenhoofdnummer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[0-8]\d{0,3}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 van het bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.verkl.compleet"/>
+				<xs:element ref="dl22.vsub.compleet"/>
+				<xs:element ref="dl22.staart.compleet"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.compleet.do">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 van een deelopdracht raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.verkl.compleet"/>
+				<xs:element ref="dl22.vsub.compleet.do"/>
+				<xs:element ref="dl22.staart.compleet.do"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.compleet.nvi">
+		<xs:annotation>
+			<xs:documentation>Het complete deel 2.2 voor een nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.vsub.compleet.nvi"/>
+				<xs:element ref="dl22.staart.compleet.nvi"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.compleet.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Het complete deel 2.2 voor een nota van inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.vsub.compleet.nvi.ro"/>
+				<xs:element ref="dl22.staart.compleet.nvi.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.compleet.ro">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 van de raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dl22.verkl.compleet"/>
+				<xs:element ref="dl22.vsub.compleet.ro"/>
+				<xs:element ref="dl22.staart.compleet.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.eenheid.res.verpl">
+		<xs:annotation>
+			<xs:documentation>Eenheid bij een hoeveelheid</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="eenheid">
+					<xs:attribute ref="eenheidwijzigbaar" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.eenheid.res.verpl.ro">
+		<xs:annotation>
+			<xs:documentation>Eenheid bij een hoeveelheid</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="eenheid.zondereuro">
+					<xs:attribute ref="eenheidwijzigbaar" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.hoev.res.verpl" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen.positief">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="A"/>
+								<xs:enumeration value="N"/>
+								<xs:enumeration value="V"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.hoev.res.verpl.ro" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting met alleen het kenmerk fictieve post</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen.positief">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="F"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.hoev.ter.inl" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid ter inlichting</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="I"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.hoofdcode">
+		<xs:annotation>
+			<xs:documentation>Een 6 cijferige hoofdcode opgebouwd uit WC, SWC en volgnr</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="werkcategorie.nr"/>
+				<xs:element ref="subwerkcategorie.nr"/>
+				<xs:element ref="hoofdcode.volgnr"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.resultaatsverpl.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een complete (6-cijferige) resultaatsverplichting incl eventuele volgposten t.b.v. Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.6cijfer.0.nvi" minOccurs="0"/>
+				<xs:element ref="dl22.bpost.6cijfer.volg.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.resultaatsverpl.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een complete (6-cijferige) resultaatsverplichting incl eventuele volgposten t.b.v. Nota van Inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.bpost.6cijfer.0.nvi.ro" minOccurs="0"/>
+				<xs:element ref="dl22.bpost.6cijfer.volg.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.1cijfer">
+		<xs:annotation>
+			<xs:documentation>bestekspost staart lengte 1 cijfer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr1"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.ak">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.ak"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.bijdrage">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.bijdrage"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.bijdrage.nvi">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de bijdragen (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.bijdrage"/>
+				<xs:element name="romptekst" type="gen.naamkort" fixed="Bijdragen" nillable="false"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.ek">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.ek"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.ek.nvi">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de eenmalige kosten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.ek"/>
+				<xs:element name="romptekst" type="gen.naamkort" fixed="Eenmalige kosten" nillable="false"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.krt.ro">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.krt.ro"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.overig">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de overige staartposten (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.overig.nvi">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de overige staartposten (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.stelpost">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de stelposten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.stelpost"/>
+				<xs:element name="romptekst" type="gen.naamkort" fixed="Stelposten" nillable="false"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.stelpost.nvi">
+		<xs:annotation>
+			<xs:documentation>De tweecijferige post behorend tot de stelposten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.stelpost"/>
+				<xs:element name="romptekst" type="gen.naamkort" fixed="Stelposten" nillable="false"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.uk">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.uk"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.2cijfer.wr">
+		<xs:annotation>
+			<xs:documentation>nummer van de 2 cijferige post in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr2.wr"/>
+				<xs:element ref="romptekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.bijdrage">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.bijdrage.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage eindigend op een 0 voor Nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<!--<xs:element ref="dl22.staart.bijdrage.percentage" minOccurs="0"/>-->
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.bijdrage.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage eindigend op een 0 voor Nota van inlichtingen t.b.v. fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<!--<xs:element ref="dl22.staart.bijdrage.percentage" minOccurs="0"/>-->
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid.ro"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+				<!--<xs:element ref="behoort.tot.raamovk"/>-->
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.bijdrage.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage" maxOccurs="10"/>
+				<xs:element ref="romptekst" maxOccurs="10"/>
+				<xs:element ref="dl22.staart.eenheid.ro" maxOccurs="10"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl.ro" maxOccurs="10"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.ek">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.ek"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.ek.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post voor de eenmalige kosten eindigend op 0 voor Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.ek"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.overig">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.overig.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) eindigend op 0 t.b.v. Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.overig"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.overig.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) eindigend op 0 t.b.v. Nota van Inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.overig"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid.ro"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+				<!--<xs:element ref="behoort.tot.raamovk"/>-->
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.overig.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) eindigend op 0 t.b.v. fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.staart.eenheid.ro"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+				<!--<xs:element ref="behoort.tot.raamovk"/>-->
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.stelpost">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type stelpost eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.stelpost"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl.stelpost"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.0.stelpost.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type stelpost eindigend op een 0 voor Nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.stelpost"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.staart.eenheid"/>
+					<xs:element ref="dl22.staart.hoev.res.verpl.stelpost"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.ak">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ak"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.ak.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ak"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+			<xs:attribute ref="kenmerk"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.bijdrage">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.bijdrage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.bijdrage.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage (percentage) post in de staartkosten t.b.v. nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.bijdrage.nvi" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.bijdrage.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage (percentage) post in de staartkosten t.b.v. nota van inlichtingen t.b.v. open posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.bijdrage.nvi.ro" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.bijdrage.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.bijdrage.ro"/>
+			</xs:sequence>
+			<xs:attribute ref="kenmerk"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.ek">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.ek"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.ek.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post voor de eenmalige kosten voor Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.ek.nvi" minOccurs="0"/>
+				<xs:element ref="dl22.staart.6cijfer.volg.ek.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.ek.ovr">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ek.ovr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.krt">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.krt"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.krt.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.krt"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.overig.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) inclusief eventuele volgposten t.b.v. Nota van Inlichtingen zonder open posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.overig.nvi" minOccurs="0"/>
+				<xs:element ref="dl22.staart.6cijfer.volg.overig.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.overig.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) inclusief eventuele volgposten t.b.v. Nota van Inlichtingen met open posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.overig.nvi.ro" minOccurs="0"/>
+				<xs:element ref="dl22.staart.6cijfer.volg.overig.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.stelpost">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de stelposten inclusief eventuele volgposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.stelpost"/>
+				<xs:element ref="dl22.staart.6cijfer.volg.stelpost" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.stelpost.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de stelposten inclusief eventuele volgposten t.b.v. nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.6cijfer.0.stelpost.nvi" minOccurs="0"/>
+				<xs:element ref="dl22.staart.6cijfer.volg.stelpost.nvi" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.uk">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.uk"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.uk.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.uk"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+			<xs:attribute ref="kenmerk"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.volg.ek">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de eenmalige kosten niet eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.volg.ek"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.volg.ek.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de eenmalige kosten niet eindigend op 0 voor Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.volg.ek"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.volg.overig.nvi">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost voor de overige staartposten (97 t/m 99) niet eindigend op 0 t.b.v. Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.volg.overig"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel" minOccurs="0"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.volg.stelpost">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type stelpost niet eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.volg.stelpost"/>
+				<xs:element ref="romptekst"/>
+				<xs:sequence>
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="dl22.hoofdcode"/>
+					<xs:element ref="versie.informatie"/>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.volg.stelpost.nvi">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type stelpost niet eindigend op een 0 voor Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.volg.stelpost"/>
+				<xs:element ref="romptekst" minOccurs="0"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dl22.eenheid.res.verpl"/>
+					<xs:element ref="dl22.hoev.ter.inl"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element ref="dl22.hoofdcode"/>
+						<xs:element ref="versie.informatie"/>
+					</xs:sequence>
+					<xs:element name="hoofdcode.hoofdtekst" type="tekstblok.hoofdcode.titel"/>
+					<xs:element ref="hoofdcode.tekstblok" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="deficode" minOccurs="0" maxOccurs="6"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.wr">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.wr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.6cijfer.wr.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.wr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="dl22.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+			<xs:attribute ref="kenmerk"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.compleet">
+		<xs:annotation>
+			<xs:documentation>de complete staartposten van een bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.1cijfer"/>
+				<xs:element ref="dl22.staart.2cijfer.ek"/>
+				<xs:element ref="dl22.staart.6cijfer.ek" minOccurs="0" maxOccurs="100"/>
+				<xs:element ref="dl22.staart.6cijfer.ek.ovr"/>
+				<xs:element ref="dl22.staart.6cijfer.krt"/>
+				<xs:element ref="dl22.staart.2cijfer.uk"/>
+				<xs:element ref="dl22.staart.6cijfer.uk"/>
+				<xs:element ref="dl22.staart.2cijfer.ak"/>
+				<xs:element ref="dl22.staart.6cijfer.ak"/>
+				<xs:element ref="dl22.staart.2cijfer.wr"/>
+				<xs:element ref="dl22.staart.6cijfer.wr"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage"/>
+				<xs:element ref="dl22.staart.6cijfer.bijdrage" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.eindtekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.compleet.do">
+		<xs:annotation>
+			<xs:documentation>de complete staartposten in een raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.1cijfer"/>
+				<xs:element ref="dl22.staart.2cijfer.krt.ro"/>
+				<xs:element ref="dl22.staart.6cijfer.krt.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.uk"/>
+				<xs:element ref="dl22.staart.6cijfer.uk.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.ak"/>
+				<xs:element ref="dl22.staart.6cijfer.ak.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.wr"/>
+				<xs:element ref="dl22.staart.6cijfer.wr.ro"/>
+				<xs:element ref="dl22.staart.eindtekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.compleet.nvi">
+		<xs:annotation>
+			<xs:documentation>De hele groep staartposten ten behoeve van Nota van Inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.1cijfer" minOccurs="0"/>
+				<xs:element ref="dl22.staart.2cijfer.ek.nvi" minOccurs="0" maxOccurs="2"/>
+				<xs:element ref="dl22.staart.tussenhfd.ek.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.ek.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.2cijfer.stelpost.nvi" minOccurs="0" maxOccurs="2"/>
+				<xs:element ref="dl22.staart.tussenhfd.stelpost.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.stelpost.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage.nvi" minOccurs="0" maxOccurs="2"/>
+				<xs:element ref="dl22.staart.tussenhfd.bijdrage.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.bijdrage.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.2cijfer.overig.nvi" minOccurs="0" maxOccurs="3"/>
+				<xs:element ref="dl22.staart.tussenhfd.overig.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.overig.nvi" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.compleet.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>De hele groep staartposten ten behoeve van Nota van Inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.1cijfer" minOccurs="0"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage.nvi" minOccurs="0" maxOccurs="2"/>
+				<xs:element ref="dl22.staart.tussenhfd.bijdrage.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.bijdrage.nvi.ro" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.2cijfer.overig.nvi" minOccurs="0" maxOccurs="3"/>
+				<xs:element ref="dl22.staart.tussenhfd.overig.nvi" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="dl22.staart.6cijfer.overig.nvi.ro" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.compleet.ro">
+		<xs:annotation>
+			<xs:documentation>de complete staartposten in een raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.1cijfer"/>
+				<xs:element ref="dl22.staart.2cijfer.krt.ro"/>
+				<xs:element ref="dl22.staart.6cijfer.krt.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.uk"/>
+				<xs:element ref="dl22.staart.6cijfer.uk.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.ak"/>
+				<xs:element ref="dl22.staart.6cijfer.ak.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.wr"/>
+				<xs:element ref="dl22.staart.6cijfer.wr.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage" maxOccurs="9"/>
+				<xs:element ref="dl22.staart.6cijfer.bijdrage.ro" maxOccurs="9"/>
+				<xs:element ref="dl22.staart.eindtekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.eenheid" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>de eenheid in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.eenheid.ro" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>de eenheid in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.eindtekst" type="tekstblok.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>de vaste tekst aan het eind van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.hoev.res.verpl" nillable="true">
+		<xs:annotation>
+			<xs:documentation>de hoeveelheid resultaatsverplichting, in de sjablonen altijd 0 maar dhet kenmerk N moet wel worden meegegeven</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="1"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.hoev.res.verpl.ro" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting behorend bij een staartpost, fictieve post</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string"> <!-- Fonto: decimal -> string -->
+					<xs:attribute ref="kenmerk"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.hoev.res.verpl.stelpost" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting behorend bij een stelpost</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen.positief">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="V"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr1" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 1 cijferige staartpost</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.ak" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.bijdrage" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.ek" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.krt.ro" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.overig">
+		<xs:annotation>
+			<xs:documentation>Het tweecijferige tussenhoofdnummer behorende bij de groep overige staartposten (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="9[7-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.stelpost" type="xs:string" fixed="95"/>
+	<xs:element name="dl22.staart.nr2.uk" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr2.wr" type="Number">
+		<xs:annotation>
+			<xs:documentation>2 cijferig bestekspostnummer in de staart</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.0.bijdrage" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.0.ek" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.0.overig">
+		<xs:annotation>
+			<xs:documentation>Het zescijferige bestekspostnummer van een overige staartpost (97-99) eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="9[7-9]\d\d\d0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.0.stelpost">
+		<xs:annotation>
+			<xs:documentation>Het zescijferige bestekspostnummer van een stelpost eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="95\d\d\d0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.ak" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.bijdrage.ro">
+		<xs:annotation>
+			<xs:documentation>6 cijferige bestekstpost in de staartposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+			</xs:sequence>
+			<xs:attribute ref="kenmerk"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.ek.ovr" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.krt" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.uk" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.volg.ek">
+		<xs:annotation>
+			<xs:documentation>Het zescijferige bestekspostnummer van een eenmalige kosten post niet eindigend op een nul</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="91[0-8][0-9][0-9][1-9]|91[9][0-8][0-9][1-9]|91[9][9][0-7][1-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.volg.overig">
+		<xs:annotation>
+			<xs:documentation>Het zescijferige bestekspostnummer van een overige staartpost (97-99) niet eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="9[7-9]\d\d\d[1-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.volg.stelpost">
+		<xs:annotation>
+			<xs:documentation>Het zescijferige bestekspostnummer van een stelpost niet eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="95\d\d\d[1-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.nr6.wr" type="Number">
+		<xs:annotation>
+			<xs:documentation>nummer van de 6 cijferige bestekspost in de staartposten</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.bijdrage">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de bijdragen (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.bijdrage"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.bijdrage.nvi">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de bijdragen (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.bijdrage"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.ek">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de eenmalige kosten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.ek"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.ek.nvi">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de eenmalige kosten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.ek"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.overig">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de overige staartposten (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.overig.nvi">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de overige staartposten (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.overig"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.stelpost">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de stelposten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.stelpost"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhfd.stelpost.nvi">
+		<xs:annotation>
+			<xs:documentation>De drie tot viercijferige post behorend tot de stelposten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.tussenhoofdnr.stelpost"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.tussenhfd.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+			<xs:attribute ref="paginaeinde"/>
+			<xs:attribute ref="wijzigingspost" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhoofdnr.bijdrage">
+		<xs:annotation>
+			<xs:documentation>Het drie tot viercijferige tussenhoofdnummer behorende bij de groep bijdrage (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="96\d\d?"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhoofdnr.ek">
+		<xs:annotation>
+			<xs:documentation>Het drie tot viercijferige tussenhoofdnummer behorende bij de groep eenmalige kosten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="91\d\d?"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhoofdnr.overig">
+		<xs:annotation>
+			<xs:documentation>Het drie tot viercijferige tussenhoofdnummer behorende bij de groep overige posten in de staart (staartkosten 97 t/m 99)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="9[7-9]\d\d?"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.staart.tussenhoofdnr.stelpost">
+		<xs:annotation>
+			<xs:documentation>Het drie tot viercijferige tussenhoofdnummer behorende bij de groep stelposten (staartkosten)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="95\d\d?"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="dl22.tussenhfd.tekst" type="tekstblok.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>De tekst onder een tussenhoofd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.verkl.compleet">
+		<xs:annotation>
+			<xs:documentation>de juridische pagina voor deel 2.2 besteksposten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam" maxOccurs="unbounded"/>
+				<xs:element ref="dlx.paragraaf" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="uitbreiden"/>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.vsub.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 met de besteksposten - in de sjabloon is hier geen inhoud, alleen de plaats waar de besteksposten in het bestek moeten worden ingevoegd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.vsub.compleet.do">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 met de besteksposten - in de sjabloon is hier geen inhoud, alleen de plaats waar de besteksposten in het bestek moeten worden ingevoegd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl22.vsub.compleet.nvi">
+		<xs:annotation>
+			<xs:documentation>Alle tussenhoofdjes, resultaatsverplichtingen en correctoeposten in deel 2.2 t.b.v. nota van inlichtingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="dl22.bpost.tussenhoofd.nvi"/>
+				<xs:element ref="dl22.resultaatsverpl.nvi"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.vsub.compleet.nvi.ro">
+		<xs:annotation>
+			<xs:documentation>Alle tussenhoofdjes, resultaatsverplichtingen en correctoeposten in deel 2.2 t.b.v. nota van inlichtingen met fictieve posten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="dl22.bpost.tussenhoofd.nvi"/>
+				<xs:element ref="dl22.resultaatsverpl.nvi.ro"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl22.vsub.compleet.ro">
+		<xs:annotation>
+			<xs:documentation>deel 2.2 met de besteksposten - in de sjabloon is hier geen inhoud, alleen de plaats waar de besteksposten in het bestek moeten worden ingevoegd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dl3.compleet">
+		<xs:annotation>
+			<xs:documentation>deel 3 van het bestek (slabloon)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="bpl.hoofdstuk0109" minOccurs="0"/>
+				<xs:element ref="bpl.hoofdstuk1099" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.deel.naam" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>naam van het deel van het bestek</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dlx.koptekst" type="xs:string"> <!-- Type needed for Fonto -->
+		<xs:annotation>
+			<xs:documentation>koptekst boven een deel van het bestek of het gehele bestek</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dlx.na.compleet">
+		<xs:annotation>
+			<xs:documentation>vrij deel na het bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dlx.paragraaf"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.inschrijvingsdocs">
+		<xs:annotation>
+			<xs:documentation>overkoepelend element voor inschrijvingsdocumenten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.inschrijvingsbiljet"/>
+				<xs:element ref="dlx.voorblad.inschrijvingsstaat"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.inschrijvingsbiljet">
+		<xs:annotation>
+			<xs:documentation>Inschrijvingsbiljet</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element name="inschrijvingsbiljet" type="tekstblok.inschrijvingsdocumenten"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="tekstblok.inschrijvingsdocumenten">
+		<xs:annotation>
+			<xs:documentation>Elementen van dit type kunnen diverse andere opmaakelementen bevatten</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="alinea.inschrijvingsdocument"/>
+			<xs:group ref="grp.lijsten.eenvoudig"/>
+			<xs:group ref="grp.tables.eenvoudig"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:group name="grp.lijsten.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op eenvoudige opsommingen</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="lijst.eenvoudig"/>
+		</xs:choice>
+	</xs:group>
+	<xs:element name="lijst.item.eenvoudig">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute ref="tabposities"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lijst.eenvoudig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="lijst.item.eenvoudig" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="muteren" use="optional" default="ja"/>
+			<xs:attribute ref="lijst.item.inspringen" use="optional"/>
+			<xs:attribute ref="lijst.item.tekstpositie" use="optional"/>
+			<xs:attribute ref="lijst.item.tekstbreedte" use="optional"/>
+			<xs:attribute ref="lijst.item.bullettype" use="optional"/>
+			<xs:attribute ref="lijst.item.suffix" use="optional"/>
+			<xs:attribute ref="lijst.item.start" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.paragraaf">
+		<xs:annotation>
+			<xs:documentation>paragraaf in de sjabloon</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.paragraafnummer" maxOccurs="unbounded"/>
+				<xs:element ref="dlx.paragraafnaam" maxOccurs="unbounded"/>
+				<xs:element ref="dlx.paragraaftekst" maxOccurs="unbounded"/>
+				<xs:element ref="aanwijzings.tekst" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute ref="verwijderen"/>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.paragraafnaam">
+		<xs:annotation>
+			<xs:documentation>naam van de paragraaf in de sjabloon</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute ref="muteren"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.paragraafnummer">
+		<xs:annotation>
+			<xs:documentation>nummer van de paragraaf in de sjabloon</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="gen.codeeenoftweecijfer">
+					<xs:attribute ref="muteren"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.paragraaftekst">
+		<xs:annotation>
+			<xs:documentation>tekst binnen de paragraaf in de sjabloon</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="alinea.paragraaf"/>
+				<xs:element ref="tabel.uitgebreid"/>
+				<xs:element ref="aanwijzings.tekst" minOccurs="0"/>
+			</xs:choice>
+			<xs:attribute ref="muteren"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.voor.compleet">
+		<xs:annotation>
+			<xs:documentation>vrije tekst voor het bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dlx.paragraaf"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.voor.inschrijving.compleet">
+		<xs:annotation>
+			<xs:documentation>vrije deel voor inschrijvingsdocumenten</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element ref="dlx.paragraaf"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="em" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>XMTML1 (afgeleid): Emphasis:
+element gebruikt om iets te benadrukken (en anders weer te geven) bij: (V/V) cursief (zie Hfd 31). Dit is niet bedoeld voor proefverwijzingen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="formule"/>
+	<xs:element name="hoofdcode.invultekst">
+		<xs:annotation>
+			<xs:documentation>Element waarbinnen de bestekschrijver kleine stukjes eigen tekst kan invullen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="lengte" type="xs:positiveInteger" use="required"/>
+					<xs:attribute ref="invultype"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hoofdcode.tekstblok">
+		<xs:annotation>
+			<xs:documentation>Element waarbinnen hoofdcode teksten zijn samengesteld</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.hoofdcode">
+					<xs:attribute name="lengte" type="xs:positiveInteger" default="500"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hoofdcode.titel.vastetekst" type="tekstblok.titel">
+		<xs:annotation>
+			<xs:documentation>
+                Element waar binnen vaste hoofdcode tekst wordt getoond
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="hoofdcode.titel.vrijetekst">
+		<xs:annotation>
+			<xs:documentation>
+                Element waarbinnen eigen tekst worden ingevoerd
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.titel">
+					<xs:attribute name="lengte" type="xs:positiveInteger"/>
+					<xs:attribute ref="invultype"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hoofdcode.vastetekst" type="tekstblok.titel">
+		<xs:annotation>
+			<xs:documentation>vaste tekst voor inschrijvingsbiljet</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="hoofdcode.volgnr" type="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>RAW-hoofdcodevolgnummer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="hoofdcode.vrijetekst">
+		<xs:annotation>
+			<xs:documentation>
+                Element waarbinnen eigen tekst worden ingevoerd
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.naamlang">
+					<xs:attribute name="lengte" type="xs:positiveInteger"/>
+					<xs:attribute ref="invultype"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hoofdstuk.nr0109">
+		<xs:annotation>
+			<xs:documentation>Nummer van een hoofdstuk van 01 t/m 09. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="2"/>
+				<xs:enumeration value="01"/>
+				<xs:enumeration value="02"/>
+				<xs:enumeration value="03"/>
+				<xs:enumeration value="04"/>
+				<xs:enumeration value="05"/>
+				<xs:enumeration value="06"/>
+				<xs:enumeration value="07"/>
+				<xs:enumeration value="08"/>
+				<xs:enumeration value="09"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="hoofdstuk.nr1099" type="gen.codetweecijferspeciaal">
+		<xs:annotation>
+			<xs:documentation>Nummer van een hoofdstuk van 10 t/m 99</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ins.stt.staart">
+		<xs:annotation>
+			<xs:documentation>staartposten van de zelfstandige inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.1cijfer"/>
+				<xs:element ref="dl22.staart.2cijfer.ek"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.ek" maxOccurs="unbounded"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.ek.ovr"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.krt"/>
+				<xs:element ref="dl22.staart.2cijfer.uk"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.uk"/>
+				<xs:element ref="dl22.staart.2cijfer.ak"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.ak"/>
+				<xs:element ref="dl22.staart.2cijfer.wr"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.wr"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.bijdrage" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.ak">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige algemene kostenpost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ak"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Algemene kosten"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.ak.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige uitvoeringskostenpost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ak"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.bijdrage">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+				<xs:element ref="romptekst"/>
+				<!--<xs:element ref="dl22.staart.bijdrage.percentage"/>-->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.bijdrage.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige post van het type bijdrage eindigend op een 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.bijdrage"/>
+				<xs:element ref="romptekst"/>
+				<!--<xs:element ref="dl22.staart.bijdrage.percentage"/>-->
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl.ro"/>
+				<!--<xs:element ref="behoort.tot.raamovk"/>-->
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.ek">
+		<xs:annotation>
+			<xs:documentation>Specificatie van een 6 cijferige bestekspost op de inschrijvingsstaat voor de eenmalige kosten eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.0.ek"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.ek.ovr">
+		<xs:annotation>
+			<xs:documentation>Specificatie van de 6 cijferige Overige eenmalige kosten post op de inschrijvingsstaat voor de eenmalige kosten eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.ek.ovr"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Overige eenmalige kosten"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.krt">
+		<xs:annotation>
+			<xs:documentation>Specificatie van de 6 cijferige kortingspost op de inschrijvingsstaat voor de eenmalige kosten eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.krt"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Korting"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.krt.ro">
+		<xs:annotation>
+			<xs:documentation>Specificatie van de 6 cijferige kortingspost op de inschrijvingsstaat voor de eenmalige kosten eindigend op 0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.krt"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Korting"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl.ro"/>
+				<!--<xs:element ref="behoort.tot.raamovk"/>-->
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.uk">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige uitvoeringskostenpost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.uk"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Uitvoeringskosten"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.uk.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige uitvoeringskostenpost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.uk"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Uitvoeringskosten"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.wr">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige winst en risicopost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.wr"/>
+				<xs:element name="romptekst" type="xs:string" fixed="Winst en risico"/> <!-- Fonto: add string type -->
+				<xs:element ref="dl22.staart.eenheid"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.6cijfer.0.wr.ro">
+		<xs:annotation>
+			<xs:documentation>Een zescijferige uitvoeringskostenpost in de staartkosten van de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.nr6.wr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="dl22.staart.eenheid.ro"/>
+				<xs:element ref="ins.stt.staart.hoev.res.verpl.ro"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    <!-- Needed type for Fonto -->
+    <xs:simpleType name="hoev.2decimalen.or.empty">
+        <xs:union memberTypes="hoev.2decimalen xs:string"/>
+    </xs:simpleType>
+    <xs:element name="ins.stt.staart.hoev.res.verpl" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting op de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen.or.empty">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="N"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+    <!-- Needed type for Fonto -->
+    <xs:simpleType name="hoev.2decimalen.positief.or.empty">
+        <xs:union memberTypes="hoev.2decimalen.positief xs:string"/>
+    </xs:simpleType>
+	<xs:element name="ins.stt.staart.hoev.res.verpl.ro" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Een hoeveelheid resultaatsverplichting op de inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="hoev.2decimalen.positief.or.empty">
+					<xs:attribute name="kenmerk" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value=""/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.staart.ro">
+		<xs:annotation>
+			<xs:documentation>de staartposten van een zelfstandige inschrijfstaat raamovereenkomst</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dl22.staart.1cijfer"/>
+				<xs:element ref="dl22.staart.2cijfer.krt.ro"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.krt.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.uk"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.uk.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.ak"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.ak.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.wr"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.wr.ro"/>
+				<xs:element ref="dl22.staart.2cijfer.bijdrage"/>
+				<xs:element ref="ins.stt.staart.6cijfer.0.bijdrage.ro" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.voorsubtot">
+		<xs:annotation>
+			<xs:documentation>de plaats waar de besteksposten moeten worden ingevuld</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ins.stt.voorsubtot.ro">
+		<xs:annotation>
+			<xs:documentation>de plaats waar de besteksposten moeten worden ingevuld</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="inschrijvingsbiljet">
+		<xs:annotation>
+			<xs:documentation>de tekst van het inschrijvingsbiljet</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="alinea.inschrijvingsdocument" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inschrijvingsstaat">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="alinea.inschrijvingsdocument" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dlx.voorblad.inschrijvingsstaat">
+		<xs:annotation>
+			<xs:documentation>Voorblad inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element name="inschrijvingsstaat" type="tekstblok.inschrijvingsdocumenten"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="li" type="tekstblok.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): List item: item binnen een opsomming</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="li.eenvoudig" type="tekstblok.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): List item: item binnen een opsomming</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="lid.nr" type="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>lid.nr</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="lijst.hoofdcode">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="lijst.item.hoofdcode" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="muteren" use="optional" default="ja"/>
+			<xs:attribute ref="lijst.item.inspringen" use="optional"/>
+			<xs:attribute ref="lijst.item.tekstpositie" use="optional"/>
+			<xs:attribute ref="lijst.item.tekstbreedte" use="optional"/>
+			<xs:attribute ref="lijst.item.bullettype" use="optional"/>
+			<xs:attribute ref="lijst.item.suffix" use="optional"/>
+			<xs:attribute ref="lijst.item.start" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lijst.item.hoofdcode">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute ref="tabposities"/>
+					<xs:attribute ref="eenheid.bouwstof"/>
+					<xs:attribute ref="eenheidwijzigbaar"/>
+					<xs:attribute ref="hoev.bouwstof"/>
+					<xs:attribute ref="aard"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ol">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Ordered (numbered) list: opsomming met getallen of letters</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="li" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ol.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Ordered (numbered) list: opsomming met getallen of letters</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="li.eenvoudig" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="paragraaf.naam" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>naam van een paragraaf</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="paragraaf.nr2">
+		<xs:annotation>
+			<xs:documentation>2 cijferige paragraaf in het abb</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="raw.inschrijvingsstaat">
+		<xs:annotation>
+			<xs:documentation>De definitie van de sjabloon voor de RAW inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="raw.contractinfo.orig" minOccurs="0"/> <!-- Optional for Fonto -->
+				<xs:element ref="dlx.koptekst"/>
+				<xs:element ref="ins.stt.voorblad"/>
+				<xs:element ref="ins.stt.voorsubtot"/>
+				<xs:element ref="ins.stt.staart"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.bestek.nr.additioneel" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>het besteknummer in RAW</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="raw.bestek.omschrijving">
+		<xs:annotation>
+			<xs:documentation>de korte beschrijving van het uit te voeren werk</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="raw.code.licentiehouder"/>
+	<xs:element name="raw.contr.aangemaakt" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>datum waarop het contract is aangemaakt</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="raw.contractinfo">
+		<xs:annotation>
+			<xs:documentation>de contractinformatie in een RAW bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="versie.jaarversie"/>
+				<xs:element ref="versie.release"/>
+				<xs:element name="raw.xml.versie"/>
+				<xs:element name="raw.bestek.nr"/>
+				<xs:element name="raw.bestek.omschrijving"/>
+				<xs:element name="raw.contr.aangemaakt"/>
+				<xs:element name="raw.contr.gewijzigd"/>
+				<xs:element name="raw.code.licentiehouder"/>
+				<xs:element name="raw.status.concept"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.contractinfo.orig">
+		<xs:annotation>
+			<xs:documentation>de contractinformatie in een RAW bestek</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="versie.jaarversie"/>
+				<xs:element ref="versie.release"/>
+				<xs:element name="raw.xml.versie"/>
+				<xs:element name="raw.bestek.nr"/>
+				<xs:element ref="raw.bestek.nr.additioneel" minOccurs="0"/>
+				<xs:element ref="raw.bestek.omschrijving" minOccurs="0"/>
+				<xs:element ref="raw.contr.aangemaakt" minOccurs="0"/>
+				<xs:element name="raw.code.licentiehouder"/>
+				<xs:element ref="raw.reg.nr"/>
+				<xs:element ref="raw.reg.datum"/>
+				<xs:element ref="raw.overeenkomst.nr"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="raw.overeenkomst.nr"/>
+	<xs:element name="raw.reg.datum" type="xs:date"/>
+	<xs:element name="raw.reg.nr"/>
+	<xs:element name="romptekst" type="gen.naamkort" nillable="false">
+		<xs:annotation>
+			<xs:documentation>de verkorte naam (romptekst) van een RAW-hoofdcodevan een overeenkomst of de omschrijving van een staartpost</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sub" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>XMTML1 (afgeleid): Subscript (verlaagde tekst)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="subwerkcategorie.nr" type="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>RAW-subwerkcategorienummer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sup" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>XMTML1 (afgeleid): Superscript (verhoogde tekst)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tabel.aanduiding">
+		<xs:annotation>
+			<xs:documentation>tabel.aanduiding: nummer en naam van een tabel.
+Hoofdstuknummer en tabelnummer zijn niet verplicht. In de Handleiding komen tabellen voor met alleen een naam.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:element ref="hoofdstuk.nr0109"/>
+					<xs:element ref="hoofdstuk.nr1099"/>
+				</xs:choice>
+				<xs:element ref="tabel.volgnr" minOccurs="0"/>
+				<xs:element ref="tabel.naam"/>
+				<xs:element ref="tabel.voettekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tabel.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="caption" type="tekstblok.eenvoudig" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="colgroup" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:element ref="thead.eenvoudig" minOccurs="0"/>
+				<xs:element ref="tfoot.eenvoudig" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="tr.eenvoudig" maxOccurs="unbounded"/>
+					<xs:element ref="tbody.eenvoudig" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute ref="muteren" use="optional" default="ja"/>
+			<xs:attribute name="summary" type="xs:string"/>
+			<xs:attribute name="width" type="xs:unsignedInt"/>
+			<xs:attribute name="border" type="xs:unsignedInt"/>
+			<xs:attribute name="frame" type="TFrame"/>
+			<xs:attribute name="rules" type="TRules"/>
+			<xs:attribute name="cellspacing" type="xs:unsignedInt"/>
+			<xs:attribute name="cellpadding" type="xs:unsignedInt"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tabel.naam" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>Beschrijving of naam bij een tabel</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tabel.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="caption" type="tekstblok.uitgebreid" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="colgroup" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:element ref="thead.uitgebreid" minOccurs="0"/>
+				<xs:element ref="tfoot.uitgebreid" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="tr.uitgebreid" maxOccurs="unbounded"/>
+					<xs:element ref="tbody.uitgebreid" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="summary" type="xs:string"/>
+			<xs:attribute name="width" type="xs:unsignedInt"/>
+			<xs:attribute name="border" type="xs:unsignedInt"/>
+			<xs:attribute name="frame" type="TFrame"/>
+			<xs:attribute name="rules" type="TRules"/>
+			<xs:attribute name="cellspacing" type="xs:unsignedInt"/>
+			<xs:attribute name="cellpadding" type="xs:unsignedInt"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tabel.voettekst" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>Voettekst bij een tabel</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="tabel.volgnr" type="gen.codeeenoftweecijfer">
+		<xs:annotation>
+			<xs:documentation>Volgnummer van een tabel</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="table">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="colspec" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="colgroup" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:element ref="thead" minOccurs="0"/>
+				<xs:element ref="tfoot" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="tbody" maxOccurs="unbounded"/>
+					<xs:element ref="tr" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="summary" type="Text"/>
+			<xs:attribute name="width" type="xs:string"/>
+			<xs:attribute name="border" type="Pixels"/>
+			<xs:attribute name="frame" type="TFrame"/>
+			<xs:attribute name="rules" type="TRules"/>
+			<xs:attribute name="cellspacing" type="Length"/>
+			<xs:attribute name="cellpadding" type="Length"/>
+			<xs:attribute name="tablestyle">
+				<xs:simpleType>
+					<xs:restriction base="Text">
+						<xs:pattern value="linetable|texttable"/>
+						<xs:pattern value="linetablehorizontal"/>
+						<xs:pattern value="linetablevertical"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tbody">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tbody.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.eenvoudig" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tbody.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.uitgebreid" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="td">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="tekstblok.vrij">
+					<xs:attributeGroup ref="coreattrs"/>
+					<xs:attribute name="rowspan" type="Number" default="1"/>
+					<xs:attribute name="colspan" type="Text" default="1"/>
+					<xs:attributeGroup ref="cellhalign"/>
+					<xs:attributeGroup ref="cellvalign"/>
+					<xs:attribute name="width" type="Text"/>
+					<xs:attribute name="disableborders">
+						<xs:simpleType>
+							<xs:restriction base="Text">
+								<xs:enumeration value="left"/>
+								<xs:enumeration value="right"/>
+								<xs:enumeration value="top"/>
+								<xs:enumeration value="bottom"/>
+								<xs:enumeration value="left,right"/>
+								<xs:enumeration value="left,top"/>
+								<xs:enumeration value="left,bottom"/>
+								<xs:enumeration value="right,left"/>
+								<xs:enumeration value="right,top"/>
+								<xs:enumeration value="right,bottom"/>
+								<xs:enumeration value="top,right"/>
+								<xs:enumeration value="top,left"/>
+								<xs:enumeration value="top,bottom"/>
+								<xs:enumeration value="bottom,left"/>
+								<xs:enumeration value="bottom,right"/>
+								<xs:enumeration value="bottom,top"/>
+								<xs:enumeration value="left,top,right"/>
+								<xs:enumeration value="left,right,top"/>
+								<xs:enumeration value="left,bottom,top"/>
+								<xs:enumeration value="left,right,bottom"/>
+								<xs:enumeration value="left,top,bottom"/>
+								<xs:enumeration value="left,bottom,top"/>
+								<xs:enumeration value="right,left,top"/>
+								<xs:enumeration value="right,top,left"/>
+								<xs:enumeration value="right,top,bottom"/>
+								<xs:enumeration value="right,bottom,top"/>
+								<xs:enumeration value="right,left,bottom"/>
+								<xs:enumeration value="right,bottom,left"/>
+								<xs:enumeration value="top,left,bottom"/>
+								<xs:enumeration value="top,bottom,left"/>
+								<xs:enumeration value="top,right,bottom"/>
+								<xs:enumeration value="top,left,right"/>
+								<xs:enumeration value="top,right,left"/>
+								<xs:enumeration value="top,bottom,right"/>
+								<xs:enumeration value="bottom,right,left"/>
+								<xs:enumeration value="bottom,left,right"/>
+								<xs:enumeration value="bottom,top,left"/>
+								<xs:enumeration value="bottom,left,top"/>
+								<xs:enumeration value="bottom,top,right"/>
+								<xs:enumeration value="bottom,right,top"/>
+								<xs:enumeration value="bottom,top,left"/>
+								<xs:enumeration value="top,left,bottom,right"/>
+								<xs:enumeration value="top,bottom,left,right"/>
+								<xs:enumeration value="top,bottom,right,left"/>
+								<xs:enumeration value="top,left,right,bottom"/>
+								<xs:enumeration value="top,left,bottom,right"/>
+								<xs:enumeration value="top,right,left,bottom"/>
+								<xs:enumeration value="top,right,bottom,left"/>
+								<xs:enumeration value="bottom,top,right,left"/>
+								<xs:enumeration value="bottom,top,left,right"/>
+								<xs:enumeration value="bottom,right,left,top"/>
+								<xs:enumeration value="bottom,right,top,left"/>
+								<xs:enumeration value="bottom,left,top,right"/>
+								<xs:enumeration value="bottom,left,right,top"/>
+								<xs:enumeration value="left,right,top,bottom"/>
+								<xs:enumeration value="left,right,bottom,top"/>
+								<xs:enumeration value="left,bottom,top,right"/>
+								<xs:enumeration value="left,bottom,right,top"/>
+								<xs:enumeration value="left,top,bottom,right"/>
+								<xs:enumeration value="left,top,right,bottom"/>
+								<xs:enumeration value="right,top,bottom,left"/>
+								<xs:enumeration value="right,top,left,bottom"/>
+								<xs:enumeration value="right,bottom,left,top"/>
+								<xs:enumeration value="right,bottom,top,left"/>
+								<xs:enumeration value="right,left,top,bottom"/>
+								<xs:enumeration value="right,left,bottom,top"/>
+								<xs:enumeration value=""/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="td.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute name="rowspan" type="xs:unsignedInt" default="1"/>
+					<xs:attribute name="colspan" type="xs:unsignedInt" default="1"/>
+					<xs:attributeGroup ref="cellhalign"/>
+					<xs:attributeGroup ref="cellvalign"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="td.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.uitgebreid">
+					<xs:attribute name="rowspan" type="xs:unsignedInt" default="1"/>
+					<xs:attribute name="colspan" type="xs:unsignedInt" default="1"/>
+					<xs:attributeGroup ref="cellhalign"/>
+					<xs:attributeGroup ref="cellvalign"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tfoot">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tfoot.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.eenvoudig" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tfoot.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.uitgebreid" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="th">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="tekstblok.uitgebreid">
+					<xs:attributeGroup ref="coreattrs"/>
+					<xs:attribute name="rowspan" type="Number" default="1"/>
+					<xs:attribute name="colspan" type="Number" default="1"/>
+					<xs:attributeGroup ref="cellvalign"/>
+					<xs:attributeGroup ref="cellhalign"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="th.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.eenvoudig">
+					<xs:attribute name="rowspan" type="xs:unsignedInt" default="1"/>
+					<xs:attribute name="colspan" type="xs:unsignedInt" default="1"/>
+					<xs:attributeGroup ref="cellvalign"/>
+					<xs:attributeGroup ref="cellhalign"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="th.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tekstblok.uitgebreid">
+					<xs:attribute name="rowspan" type="xs:unsignedInt" default="1"/>
+					<xs:attribute name="colspan" type="xs:unsignedInt" default="1"/>
+					<xs:attributeGroup ref="cellvalign"/>
+					<xs:attributeGroup ref="cellhalign"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="thead">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="thead.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.eenvoudig" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="thead.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tr.uitgebreid" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tr">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="th"/>
+				<xs:element ref="td"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tr.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="th.eenvoudig" minOccurs="0"/>
+				<xs:element ref="td.eenvoudig" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tr.uitgebreid">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="th.uitgebreid" minOccurs="0"/>
+				<xs:element ref="td.uitgebreid" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cellhalign"/>
+			<xs:attributeGroup ref="cellvalign"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ul">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Unordered list: lijst met opsommingstekens</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="li" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ul.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Unordered list: lijst met opsommingstekens</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="li.eenvoudig" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="versie.datum" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>Datum waarop de status is vastgesteld (c.q. de informatie in deze status is gepubliceerd)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="versie.informatie">
+		<xs:annotation>
+			<xs:documentation>Groep elementen met alle versie informatie</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="versie.datum"/>
+				<xs:element ref="versie.status"/>
+				<xs:element ref="versie.jaarversie"/>
+				<xs:element ref="versie.release"/>
+				<xs:element ref="versie.laatste.mutatie"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="versie.jaarversie" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Geeft de jaarversie aan (jjjj-mm formaat)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="versie.laatste.mutatie" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>Datum waarop de informatie waarop de versie informatie betrekking heeft, voor de laatste keer is gemuteerd</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="versie.release">
+		<xs:annotation>
+			<xs:documentation>Geeft de versie van tussentijdse updates aan (jj-mm formaat)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="7"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="versie.status" default="concept">
+		<xs:annotation>
+			<xs:documentation>Status van de versie</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="concept"/>
+				<xs:enumeration value="voorlopig vastgesteld"/>
+				<xs:enumeration value="definitief vastgesteld"/>
+				<xs:enumeration value="verplicht"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="voorblad.inschrijvingsstaat">
+		<xs:annotation>
+			<xs:documentation>voorblad inschrijvingsstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="alinea.inschrijvingsdocument" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ins.stt.voorblad">
+		<xs:annotation>
+			<xs:documentation>Voorblad bij een zelfstandige inschrijfstaat</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dlx.koptekst" minOccurs="0"/>
+				<xs:element ref="dlx.deel.naam"/>
+				<xs:element name="voorblad.inschrijvingsstaat" type="tekstblok.inschrijvingsdocumenten"/>
+			</xs:sequence>
+			<xs:attribute ref="tabposities"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="werkcategorie.nr" type="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>RAW-werkcategorienummer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="gen.leegelement">
+		<xs:annotation>
+			<xs:documentation>Een element zonder inhoud of attributen</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.aanwijzings.tekst" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Aanwijzingstekst binnen een hoofdtekst</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="grp.regelopmaak"/>
+			<xs:group ref="grp.supersub"/>
+			<xs:group ref="grp.lists.eenvoudig"/>
+			<xs:element ref="tabel.eenvoudig"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.alinea.vastvrij">
+		<xs:annotation>
+			<xs:documentation>De vaste en variabele teksten binnen een alinea in een hoofdcode of inschrijvingsdocument</xs:documentation>
+		</xs:annotation>
+		<xs:choice maxOccurs="unbounded">
+			<xs:element ref="hoofdcode.vastetekst"/>
+			<xs:element ref="hoofdcode.vrijetekst"/>
+			<xs:element ref="hoofdcode.invultekst"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.eenvoudig" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Elementen van dit type kunnen diverse andere elementen bevatten</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="grp.regelopmaak"/>
+			<xs:group ref="grp.supersub"/>
+			<xs:element ref="alinea.inschrijvingsdocument"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.hoofdcode">
+		<xs:annotation>
+			<xs:documentation>De vaste en variabele tekstblokken binnen een hoofdcode</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="alinea.hoofdcode"/>
+				<xs:group ref="grp.lijsten.hoofdcode"/>
+				<xs:group ref="grp.tables.eenvoudig"/>
+				<xs:element ref="aanwijzings.tekst"/>
+			</xs:choice>
+			<!--<xs:element ref="aanwijzings.tekst" minOccurs="0" />-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.hoofdcode.titel">
+		<xs:annotation>
+			<xs:documentation>De (uitgebreide) naam van een RAW-hoofdcode</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="hoofdcode.titel.vastetekst"/>
+				<xs:element ref="hoofdcode.titel.vrijetekst"/>
+			</xs:choice>
+			<xs:element ref="aanwijzings.tekst" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.naamlang" mixed="true">
+		<xs:annotation>
+			<xs:documentation>De elementen die voor kunnen komen in de naam van een artikel, een figuur, een proef of een tabel.</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="grp.supersub"/>
+			<xs:group ref="grp.regelopmaak"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.titel" mixed="true">
+		<xs:annotation>
+			<xs:documentation>De elementen die kunnen voorkomen in de een titel element van een resultaatsbeschrijving</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="grp.supersub"/>
+			<xs:group ref="grp.overig"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.uitgebreid" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Elementen van dit type kunnen diverse andere opmaakelementen bevatten</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="aanwijzings.tekst" minOccurs="0"/>
+			<xs:group ref="grp.supersub" minOccurs="0"/>
+			<xs:element ref="alinea.paragraaf" minOccurs="0"/>
+			<xs:element ref="br" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tekstblok.vrij" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Elementen van dit type kunnen diverse andere opmaakelementen bevatten, dit tekstblok kan tevens 4 niveaus van koppen bevatten ivm proeven en bijlagen bij hoofdstukken</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="grp.lists"/>
+			<xs:group ref="grp.tables"/>
+			<xs:group ref="grp.regelopmaak"/>
+			<xs:group ref="grp.supersub"/>
+			<xs:element ref="formule"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:simpleType name="Character">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): a single character, as per section 2.2 of [XML]</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1" fixed="true"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="deficode.inhoudnr">
+		<xs:annotation>
+			<xs:documentation>Deficode inhoud nummer</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[1-9][1-9]?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="deficode.positienr">
+		<xs:annotation>
+			<xs:documentation>De mogelijke waarde waarmee een deficodekolom kan worden aangeduid</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="56"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eenheid">
+		<xs:annotation>
+			<xs:documentation>Eenheid</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z1-9/*.]{0,4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eenheid.zondereuro">
+		<xs:annotation>
+			<xs:documentation>Eenheid zonder EUR eenheid.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z1-9/*.]{0,4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.codeeencijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>Een eencijferige code van 0 t/m 9</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:pattern value="[0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.codeeencijferspeciaal">
+		<xs:annotation>
+			<xs:documentation>Een eencijferige code van 1 t/m 9</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:pattern value="[1-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.codeeenoftweecijfer">
+		<xs:annotation>
+			<xs:documentation>Een eencijferige of tweecijferige code van 0 t/m 99</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+			<xs:pattern value="[0-9]([0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.codetweecijferalgemeen">
+		<xs:annotation>
+			<xs:documentation>Een tweecijferige code van 00 t/m 99</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:pattern value="[0-9][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.codetweecijferspeciaal">
+		<xs:annotation>
+			<xs:documentation>Een tweecijferige code van 10 t/m 99</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:pattern value="[1-9][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.naamkort" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Naam van 100 alfanumerieke posities</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:normalizedString">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gen.naamlang">
+		<xs:annotation>
+			<xs:documentation>Naam (geen lengtebeperking)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="gencodetweecijfer0199">
+		<xs:annotation>
+			<xs:documentation>Een tweecijferige code 01 t/m 99, 0 op tweede positie is niet toegestaan</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9][1-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hoev.2decimalen">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hoev.2decimalen.positief">
+		<xs:restriction base="hoev.2decimalen">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Length">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): nn for pixels or nn% for percentage length</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[-+]?(\d+|\d+(\.\d+)?%)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MultiLength">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): pixel, percentage, or relative</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[-+]?(\d+|\d+(\.\d+)?%)|[1-9]?(\d+)?\*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Number">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): one or more digits      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:pattern value="[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Pixels">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): integer representing length in pixels</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="StyleSheet">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Style sheet data</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="Text">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): Used for titles etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="TFrame">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      The border attribute sets the thickness of the frame around the
+      table. The default units are screen pixels.
+
+      The frame attribute specifies which parts of the frame around
+      the table should be rendered. The values are not the same as
+      CALS to avoid a name clash with the valign attribute.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="void"/>
+			<xs:enumeration value="above"/>
+			<xs:enumeration value="below"/>
+			<xs:enumeration value="hsides"/>
+			<xs:enumeration value="lhs"/>
+			<xs:enumeration value="rhs"/>
+			<xs:enumeration value="vsides"/>
+			<xs:enumeration value="box"/>
+			<xs:enumeration value="border"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TRules">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): 
+      The rules attribute defines which rules to draw between cells:
+
+      If rules is absent then assume:
+          "none" if border is absent or border="0" otherwise "all"
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="groups"/>
+			<xs:enumeration value="rows"/>
+			<xs:enumeration value="cols"/>
+			<xs:enumeration value="all"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="URI">
+		<xs:annotation>
+			<xs:documentation>XHTML1 (afgeleid): a Uniform Resource Identifier, see [RFC2396]</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+	<xs:group name="grp.lijsten.hoofdcode">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op opsommingen</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="lijst.hoofdcode"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.lists">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op opsommingen</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="ul"/>
+			<xs:element ref="ol"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.lists.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op eenvoudige opsommingen</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="ul.eenvoudig"/>
+			<xs:element ref="ol.eenvoudig"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.overig">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die niet in een andere groep kunnen worden ondergebracht</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="em"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.regelopmaak">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op de regelopmaak</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="br"/>
+			<xs:element ref="em"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.supersub">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op het super / sub weergeven van tekst</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="sup" maxOccurs="unbounded"/>
+			<xs:element ref="sub" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.tables">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op de diverse onderdelen van tabellen</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tabel.aanduiding" minOccurs="0"/>
+			<xs:element ref="table"/>
+			<xs:element ref="tabel.voettekst" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.tables.eenvoudig">
+		<xs:annotation>
+			<xs:documentation>Groep met elementen die betrekking hebben op de diverse onderdelen van tabellen</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="tabel.aanduiding" minOccurs="0"/>
+			<xs:element ref="tabel.eenvoudig"/>
+			<xs:element ref="tabel.voettekst" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+</xs:schema>

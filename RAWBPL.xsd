@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
+<!-- Note: Contains some changes for Fonto - marked with comments. File should be kept up to date with original XSD. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.60 27/03/2026">
+	<xs:include schemaLocation="RAWBASIS.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+    ================== Elementen voor bepalingen =====================  
+   </xs:documentation>
+	</xs:annotation>
+	<xs:element name="dl3.compleet">
+		<xs:annotation>
+			<xs:documentation>Het complete deel 3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="deel.naam"/>
+				<xs:element ref="bpl.hoofdstuk0109" minOccurs="0" maxOccurs="9"/>
+				<xs:element ref="bpl.hoofdstuk1099" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.lidtekst" type="tekstblok.uitgebreid">
+		<xs:annotation>
+			<xs:documentation> tekst van een lid uit de cat. bepalingen - hier kan aanwijzingstekst voorkomen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bpl.lid">
+		<xs:annotation>
+			<xs:documentation>Definitie van een lid uit de cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="lid.nr"/>
+				<xs:element ref="bpl.lidtekst"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.artikel">
+		<xs:annotation>
+			<xs:documentation>Definitie van een artikel uit de cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="artikel.nr" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="versie.informatie" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="artikel.hoofd" minOccurs="0"/> <!-- Optional for Fonto, added in export -->
+				<xs:element ref="bpl.lid" maxOccurs="99"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="paragraaftekst.nr"/>
+	<xs:element name="paragraaftekst.naam"/>
+	<xs:element name="bpl.paragraaf1">
+		<xs:annotation>
+			<xs:documentation>Definitie van een paragraaf 1 cijferig cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf1.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:sequence>
+					<xs:element ref="bpl.artikel" minOccurs="0" maxOccurs="99"/>
+					<xs:element ref="paragraaf.leeg" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.paragraaf2">
+		<xs:annotation>
+			<xs:documentation>Definitie van een paragraaf (2 cijferig) cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.artikel" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>
+    ================== Elementen voor algemene teksten =====================  
+   </xs:documentation>
+	</xs:annotation>
+	<xs:element name="bpl.naam" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>Titel tbv pagina's achter (deel)hoofdstukken zoals bijlagen, tabellen en modellen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bpl.tekstvrij" type="tekstblok.vrij">
+		<xs:annotation>
+			<xs:documentation>Vrije tekst voor pagina's achter (deel)hoofdstukken zoals bijlagen, tabellen en modellen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="bpl.algemenetekst">
+		<xs:annotation>
+			<xs:documentation>Combinatie van titel en vrije tekst voor pagina's achter (deel) hoofdstukken zoals bijlagen, tabellen en modellen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="bpl.naam" minOccurs="0"/>
+				<xs:element ref="bpl.tekstvrij" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation> ====================bijlagen / modellen / tabellen / figuren =================</xs:documentation>
+	</xs:annotation>
+	<xs:element name="bpl.bijlagen">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaftekst.nr"/>
+				<xs:element ref="paragraaftekst.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.bijlage" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.bijlage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="bijlage.nr"/>
+				<xs:element ref="bijlage.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.algemenetekst" minOccurs="0"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bijlage.nr" type="xs:integer"/>
+	<xs:element name="bijlage.naam" type="gen.naamlang"/>
+	<xs:element name="bpl.modellen">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaftekst.nr"/>
+				<xs:element ref="paragraaftekst.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.model" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.model">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="model.nr"/>
+				<xs:element ref="model.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.algemenetekst"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="model.nr" type="xs:integer"/>
+	<xs:element name="model.naam" type="gen.naamlang"/>
+	<xs:element name="bpl.tabellen">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaftekst.nr"/>
+				<xs:element ref="paragraaftekst.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.tabel" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.tabel">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tabel.nr"/>
+				<xs:element ref="tabel.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.algemenetekst"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tabel.nr" type="xs:integer"/>
+	<xs:element name="bpl.figuren">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaftekst.nr"/>
+				<xs:element ref="paragraaftekst.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.figuur" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.figuur">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="figuur.nr"/>
+				<xs:element ref="figuur.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.algemenetekst"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="figuur.nr" type="xs:integer"/>
+	<xs:annotation>
+		<xs:documentation>
+   ================== (deel)hoofdstukken =====================  
+   		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="bpl.deelhoofdstuk">
+		<xs:annotation>
+			<xs:documentation>Definitie van een deelhoofdstuk in de cat.bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="deelhoofdstuk.nr"/>
+				<xs:element ref="deelhoofdstuk.naam" minOccurs="0"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.paragraaf1" minOccurs="0" maxOccurs="7"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+				<xs:element ref="bpl.bijlagen" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="bpl.modellen" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="bpl.tabellen" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="bpl.figuren" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.hoofdstuk0109">
+		<xs:annotation>
+			<xs:documentation>Definitie van de hoofdstukken 01 t/m 09. voor de cat. bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr0109" maxOccurs="9"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+				<xs:element ref="bpl.paragraaf2" minOccurs="0" maxOccurs="99"/>
+				<xs:element ref="bpl.bijlagen" minOccurs="0"/>
+				<xs:element ref="bpl.modellen" minOccurs="0"/>
+				<xs:element ref="bpl.tabellen" minOccurs="0"/>
+				<xs:element ref="bpl.figuren" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.hoofdstuk1099">
+		<xs:annotation>
+			<xs:documentation>Definitie van de hoofdstukken 10-99 voor de catalogus bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr1099" maxOccurs="99"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.deelhoofdstuk" maxOccurs="9"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpl.proefpar2">
+		<xs:annotation>
+			<xs:documentation>Definitie van een bepaling in het eerste deel van Proeven</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr" maxOccurs="99"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="versie.info.boom"/>
+				<xs:element ref="bpl.artikel"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="std.hoofdstuk02">
+		<xs:annotation>
+			<xs:documentation>Definitie hoofdstuk 2 Proeven</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr02"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="bpl.proefpar2" maxOccurs="99"/>
+				<xs:element ref="std.proefpar02"/>
+				<xs:element ref="bpl.bijlagen" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="bpl.modellen" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="bpl.tabellen" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="std.proefpar02">
+		<xs:annotation>
+			<xs:documentation>Definitie van de paragraaf in Proeven waaronder de Proeven zijn vermeld</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr" maxOccurs="99"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="versie.info.boom" minOccurs="0"/>
+				<xs:element ref="proeven2025" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="std.proef">
+		<xs:annotation>
+			<xs:documentation>Beschrijving van een proef</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="proef.nr" minOccurs="0"/> <!-- can be empty in Fonto -->
+				<xs:element ref="proef.naam" minOccurs="0"/> <!-- can be empty in Fonto -->
+				<xs:element ref="proeftekst"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

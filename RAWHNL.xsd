@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version=" 1.50 20/02/2025">
+	<xs:include schemaLocation="RAWBASIS.xsd"/>
+	<xs:include schemaLocation="RAWBPL.xsd"/>
+	<xs:element name="hnl.compleet.standaard">
+		<xs:annotation>
+			<xs:documentation>De Handleiding van de Standaard</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hnl.hoofdstuk00">
+					<xs:annotation>
+						<xs:documentation>Definitie van de Handleiding van H00 de algemene toelichting op de RAW systematiek</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="hnl.hoofdstuk0109" minOccurs="0" maxOccurs="10"/>
+				<xs:element ref="hnl.hoofdstuk1099" minOccurs="0" maxOccurs="99"/>
+				<xs:element ref="hnl.hoofdstuk02" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.werkcategorie">
+		<xs:annotation>
+			<xs:documentation>Werkcategorie tbv de handleiding</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="werkcategorie.nr" maxOccurs="99"/>
+				<xs:element ref="werkcategorie.naam" maxOccurs="99"/>
+				<xs:element ref="hnl.tekst" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="hnl.subwerkcategorie" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.compleet.catres">
+		<xs:annotation>
+			<xs:documentation>De Handleiding van de Catalogus Resultaatsbeschrijvingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hnl.werkcategorie" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.compleet.catbep">
+		<xs:annotation>
+			<xs:documentation>De Handleiding van de Catalogus Bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hnl.hoofdstuk0109" minOccurs="0" maxOccurs="9"/>
+				<xs:element ref="hnl.hoofdstuk1099" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.hoofdstuk00">
+		<xs:annotation>
+			<xs:documentation>Definitie van de Handleiding van H00</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="hoofdstuk.nr00"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="hnl.paragraaf00" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.hoofdstuk0109">
+		<xs:annotation>
+			<xs:documentation>Definitie van hoofdstuk 00 t/m 09 cat.bepalingen in de Handleiding</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr0109"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+				<xs:element ref="hnl.paragraaf2" minOccurs="0" maxOccurs="99"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hoofdstuk.nr00">
+		<xs:annotation>
+			<xs:documentation>Nummer van hoofdstuk 00 t/m 09 (in de Handleiding)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="2"/>
+				<xs:pattern value="[0][0-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="hnl.hoofdstuk02">
+		<xs:annotation>
+			<xs:documentation>Handleiding bij H02-proeven</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr02"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="hnl.proefpar02" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.proefpar02">
+		<xs:annotation>
+			<xs:documentation>Handleiding proefparagraaf</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr" maxOccurs="unbounded"/>
+				<xs:element ref="paragraaf.naam" maxOccurs="unbounded"/>
+				<xs:element ref="hnl.proef" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.proef">
+		<xs:annotation>
+			<xs:documentation>Handleiding tbv proef</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="proef.nr"/>
+				<xs:element ref="proef.naam"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>Definities hoofdstukken 10 t/m 99</xs:documentation>
+	</xs:annotation>
+	<xs:element name="hnl.hoofdstuk1099">
+		<xs:annotation>
+			<xs:documentation>Handleiding H10-99 Cat Bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdstuk.nr1099"/>
+				<xs:element ref="hoofdstuk.naam"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+				<xs:element ref="hnl.deelhoofdstuk1099" minOccurs="0" maxOccurs="9"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.deelhoofdstuk1099">
+		<xs:annotation>
+			<xs:documentation>Handleiding deelhoofdstuk Cat Bepalingen</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="deelhoofdstuk.nr" minOccurs="0" maxOccurs="9"/>
+				<xs:element ref="deelhoofdstuk.naam" minOccurs="0" maxOccurs="9"/>
+				<xs:element ref="hnl.tekst" minOccurs="0" maxOccurs="9"/>
+				<xs:element ref="hnl.paragraaf1" minOccurs="0" maxOccurs="9"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.paragraaf1">
+		<xs:annotation>
+			<xs:documentation>paragraaf in Handleiding  van de Standaard</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf1.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="hnl.artikel" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.paragraaf2">
+		<xs:annotation>
+			<xs:documentation>paragraaf (2 cijfers) in H01-09 in Handleiding</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="hnl.artikel" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.artikel">
+		<xs:annotation>
+			<xs:documentation> een artikel in Handleiding van de Standaard</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="9">
+				<xs:element ref="artikel.nr"/>
+				<xs:element ref="artikel.hoofd"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.subwerkcategorie">
+		<xs:annotation>
+			<xs:documentation>subwerkcat. in de Handleiding</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="subwerkcategorie.nr"/>
+				<xs:element ref="subwerkcategorie.naam"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+				<xs:element ref="hnl.resultaatsbeschrijving" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.resultaatsbeschrijving">
+		<xs:annotation>
+			<xs:documentation>Handleiding bij een resultaatsbeschrijving</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hoofdcode.volgnr"/>
+				<xs:element ref="romptekst"/>
+				<xs:element ref="eenheid"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.bijlage">
+		<xs:annotation>
+			<xs:documentation>Definitie van een bijlage in de Handleiding</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hnl.bijlagenummer"/>
+				<xs:element ref="hnl.bijlagenaam"/>
+				<xs:element ref="hnl.tekst"/>
+			</xs:sequence>
+			<xs:attribute ref="guid" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.bijlagenummer" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation>Nummer van een bijlage in de Handleiding</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="hnl.bijlagenaam" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>Naam van een bijlage in de Handleiding</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:annotation>
+		<xs:documentation>Definities paragrafen</xs:documentation>
+	</xs:annotation>
+	<xs:element name="hnl.paragraaf00">
+		<xs:annotation>
+			<xs:documentation>paragraaf in H00 van de Standaard</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="9">
+				<xs:element ref="paragraaf2.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="bpl.algemenetekst" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="hnl.artikel" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.paragraaf-H00">
+		<xs:annotation>
+			<xs:documentation>paragraaf in Handleiding H10-99</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="paragraaf2.nr"/>
+				<xs:element ref="paragraaf.naam"/>
+				<xs:element ref="hnl.tekst" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hnl.paragraafnaam" type="tekstblok.naamlang">
+		<xs:annotation>
+			<xs:documentation>Naam van een paragraaf in de Handleiding</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>
