@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2018 (x64) (http://www.altova.com) by Daoud Urdu (CROW) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="http://www.w3.org/1998/Math/MathML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.60 27/03/2026">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="http://www.w3.org/1998/Math/MathML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.60 17/06/2026">
 	<xs:import namespace="http://www.w3.org/1998/Math/MathML" schemaLocation="mathml3/mathml3.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
@@ -928,7 +928,7 @@ element gebruikt om iets te benadrukken (en anders weer te geven) bij: (V/V) cur
 			<xs:documentation>Groep met elementen die betrekking hebben op figuren</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="img" maxOccurs="unbounded"/>
+			<xs:element name="img" maxOccurs="unbounded"/>
 			<xs:element ref="figuur.naam" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:group>

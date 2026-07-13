@@ -1,7 +1,12 @@
 # Changelog
 
+## v1.60 (01-07-2026)
+- RAWBASIS.xsd
+  Minor wijziging, ondersteuning voor element 
+    ``<img/>``
+
 ## v1.60 (27-03-2026)
 - RAWBASIS.xsd, RAWBPL.xsd, RAWcat.xsd, RAWSTD.xsd bijgewerkt naar versie 1.60
 
 ## v1.50
-- Initiële versie RAWABB.xsd, RAWHNL.xsd, RAWproef.xsd
+- Initiï¿½le versie RAWABB.xsd, RAWHNL.xsd, RAWproef.xsd
