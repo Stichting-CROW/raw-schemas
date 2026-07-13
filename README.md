@@ -2,6 +2,9 @@
 
 Publieke XSD-schema's voor RAW (Rationeel en Werkbaar) domeinmodellen, beheerd door [Stichting CROW](https://www.crow.nl).
 
+## Wijzigingen
+Zie CHANGELOG.md voor wijzigingen
+
 ## Schema's
 
 | Bestand | Versie | Datum |
@@ -16,4 +19,4 @@ Publieke XSD-schema's voor RAW (Rationeel en Werkbaar) domeinmodellen, beheerd d
 
 ## Licentie
 
-© Stichting CROW. Zie [LICENSE](LICENSE) voor gebruiksvoorwaarden.
+ï¿½ Stichting CROW. Zie [LICENSE](LICENSE) voor gebruiksvoorwaarden.
